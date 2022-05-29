@@ -1,0 +1,4 @@
+<launch>
+    <rosparam file="$(find beginner_tutorials)/config/globalPlanner.yaml" />
+    <node name="zed_chala_node" pkg="beginner_tutorials" type="zed_chala.py" output="screen"/>
+</launch>

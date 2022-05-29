@@ -1,0 +1,146 @@
+
+
+
+
+
+
+<!--Suspension 3-->
+
+<link name="suspension3">
+     <inertial>
+	<origin xyz="0 0 ${-ch_height}" rpy="0 0 0"/>
+      <mass value="${sus_mass}"/>
+ 	<inertia ixx="${sus_mass*(sus_length*sus_length+sus_height*sus_height)/12}" ixy="0.0" ixz="0.0" iyy="${sus_mass*(sus_length*sus_length+sus_width*sus_width)/12}" iyz="0.0" izz="${sus_mass*(sus_width*sus_width+sus_height*sus_height)/12}"/>
+    </inertial>
+    <visual>
+	<origin xyz="0 0 ${-ch_height}" rpy="0 0 0"/>
+        <geometry>
+            <box size="${sus_length} ${sus_width} ${sus_height}"/>
+        </geometry>
+    </visual>
+    <collision>
+	<origin xyz="0 0 ${-ch_height}" rpy="0 0 0"/>
+        <geometry>
+            <box size="${sus_length} ${sus_width} ${sus_height}"/>
+        </geometry>
+    </collision>
+</link>
+
+<!--Suspension 3 Joint-->
+
+<joint type="fixed" name="suspension3_joint">
+    <axis xyz="0 1 0" rpy="0 0 0"/>
+    <origin rpy="0 -0.785 0" xyz="0.3 ${-ch_width/2-sus_length/2} 0" />
+    <parent link="base_link"/>
+    <child link="suspension3"/>
+</joint>
+
+
+
+<!--Wheel Front Right 3-->
+
+<link name="front_right_3">
+     <inertial>
+	<origin xyz="0 0 0" rpy="0 1.57 1.57"/>
+      <mass value="${wheel_mass}"/>
+ 	<inertia ixx="${wheel_mass*((3*wheel_radius*wheel_radius)+(wheel_width*wheel_width))/12}" ixy="0.0" ixz="0.0" iyy="${wheel_mass*((3*wheel_radius*wheel_radius)+(wheel_width*wheel_width))/12}" iyz="0.0" izz="${wheel_mass*((3*wheel_radius*wheel_radius)+(wheel_width*wheel_width))/12}"/>
+    </inertial>
+    <visual>
+	<origin xyz="0 0 0" rpy="0 1.57 1.57"/>
+        <geometry>
+            <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+        </geometry>
+    </visual>
+    <collision>
+	<origin xyz="0 0 0" rpy="0 1.57 1.57"/>
+        <geometry>
+            <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+        </geometry>
+    </collision>
+</link>
+
+
+<!--Wheel Front Right Joint 3-->
+
+<joint type="continuous" name="front_right_joint_3">
+    <origin rpy="0 -0.785 3.14" xyz="0 0 ${-sus_height}"/>
+    <child link="front_right_3"/>
+    <parent link="suspension3"/>
+    <axis xyz="0 1 0" rpy="0 0 "/>
+    <limit effort="100" velocity="0.5"/>
+    <joint_properties damping="0.0" friction="1.0"/>
+</joint>
+
+
+<!--Suspension 7-->
+
+<link name="suspension7">
+     <inertial>
+	<origin xyz="0 0 ${-ch_height}" rpy="0 0 0"/>
+      <mass value="${sus_mass}"/>
+ 	<inertia ixx="${sus_mass*(sus_length*sus_length+sus_height*sus_height)/12}" ixy="0.0" ixz="0.0" iyy="${sus_mass*(sus_length*sus_length+sus_width*sus_width)/12}" iyz="0.0" izz="${sus_mass*(sus_width*sus_width+sus_height*sus_height)/12}"/>
+    </inertial>
+    <visual>
+	<origin xyz="0 0 ${-ch_height}" rpy="0 0 0"/>
+        <geometry>
+            <box size="${sus_length} ${sus_width} ${sus_height}"/>
+        </geometry>
+    </visual>
+    <collision>
+	<origin xyz="0 0 ${-ch_height}" rpy="0 0 0"/>
+        <geometry>
+            <box size="${sus_length} ${sus_width} ${sus_height}"/>
+        </geometry>
+    </collision>
+</link>
+
+<!--Suspension 7 Joint-->
+
+<joint type="fixed" name="suspension7_joint">
+    <axis xyz="0 1 0" rpy="0 0 0"/>
+    <origin rpy="0 -0.785 0" xyz="0.3 ${ch_width/2+sus_length/2} 0" />
+    <parent link="base_link"/>
+    <child link="suspension7"/>
+</joint>
+
+<!--Wheel Front Left 3-->
+
+<link name="front_left_3">
+     <inertial>
+	<origin xyz="0 0 0" rpy="0 1.57 1.57"/>
+      <mass value="${wheel_mass}"/>
+ 	<inertia ixx="${wheel_mass*((3*wheel_radius*wheel_radius)+(wheel_width*wheel_width))/12}" ixy="0.0" ixz="0.0" iyy="${wheel_mass*((3*wheel_radius*wheel_radius)+(wheel_width*wheel_width))/12}" iyz="0.0" izz="${wheel_mass*((3*wheel_radius*wheel_radius)+(wheel_width*wheel_width))/12}"/>
+    </inertial>
+    <visual>
+	<origin xyz="0 0 0" rpy="0 1.57 1.57"/>
+        <geometry>
+            <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+        </geometry>
+    </visual>
+    <collision>
+	<origin xyz="0 0 0" rpy="0 1.57 1.57"/>
+        <geometry>
+            <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+        </geometry>
+    <surface>
+        <friction>
+          <ode>
+            <mu>0.01</mu>
+            <mu2>0.01</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+</link>
+
+
+<!--Wheel Front Left Joint 3-->
+
+<joint type="continuous" name="front_left_joint_3">
+    <origin rpy="0 -0.785 3.14" xyz="0 0 ${-sus_height}"/>
+    <child link="front_left_3"/>
+    <parent link="suspension7"/>
+    <axis xyz="0 1 0" rpy="0 0 "/>
+    <limit effort="100" velocity="0.5"/>
+    <joint_properties damping="0.0" friction="1.0"/>
+</joint>

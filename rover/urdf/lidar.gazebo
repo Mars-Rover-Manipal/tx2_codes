@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<robot xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+  xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+  xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+  xmlns:xacro="http://ros.org/wiki/xacro"
+  name="lidar">
+
+  <node pkg = 'tf2_ros' type ='static_transform_publisher' name = 'base1' args = "0 0 0 0 0 0 platform lidar" />
+
+<xacro:property name="name" value="laser"/>
+<xacro:property name="link" value="lidar"/>
+<xacro:property name="ros_topic" value="/scan"/>
+<xacro:property name="length" value="0.06"/>
+<xacro:property name="width" value="0.06"/>
+<xacro:property name="height" value="0.079"/>
+<xacro:property name="mass" value="0.1"/>
+<xacro:property name="z_offset" value="0.05595"/>
+<xacro:property name="min_angle" value="-2.357"/>
+<xacro:property name="max_angle" value="2.357"/>
+<xacro:property name="min_range" value="0.05"/>
+<xacro:property name="max_range" value="0.4"/>
+<xacro:property name="gaussian_noise" value="0.015"/>
+<xacro:property name="samples" value="271"/>
+
+<gazebo reference="${link}">
+      <material value="Gazebo/Blue"/>
+      <sensor type="ray" name="${name}">
+    <visualize>false</visualize>
+    <pose>0.0 0.0 0.0 0.0 0.0 0.0</pose>
+    <ray>
+      <scan>
+        <horizontal>
+          <samples>271</samples>
+          <min_angle>-2.57</min_angle>
+          <max_angle>2.57</max_angle>
+        </horizontal>
+        <vertical>
+          <samples>4</samples>
+          <min_angle>-0.012</min_angle>
+          <max_angle>0.084</max_angle>
+        </vertical>
+      </scan>
+      <range>
+        <min>0.05</min>
+        <max>50.0</max>
+      </range>
+    </ray>
+    <plugin name="plugin_1" filename="libgazebo_ros_velodyne_laser.so">
+      <gaussianNoise>0.00</gaussianNoise>
+      <hokuyoMinIntensity>1</hokuyoMinIntensity>
+      <alwaysOn>true</alwaysOn>
+      <updateRate>40</updateRate>
+      <topicName>Lidar_3d</topicName>
+      <frameName>base_link</frameName>
+    </plugin>
+    </sensor>
+    </gazebo>
+
+<!-- GPS SENSOR-->
+
+<gazebo>
+	<plugin name="novatel_gps_sim" filename="libhector_gazebo_ros_gps.so">
+	<alwayson>true</alwayson>
+	<updaterate>1.0</updaterate>
+	<bodyname>base_link</bodyname>
+	<topicname>/fix</topicname>	
+	<velocitytopicname>/fix_velocity</velocitytopicname>
+	<drift>5.0 5.0 5.0</drift>
+	<gaussiannoise>0.1 0.1 0.1</gaussiannoise>
+	<velocitydrift>0 0 0</velocitydrift>
+	<velocitygaussiannoise>0.1 0.1 0.1</velocitygaussiannoise>
+	</plugin>
+</gazebo>
+</robot>

@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "includePath": [
+                "/home/dishita/mrm_ws/devel/include/**",
+                "/opt/ros/noetic/include/**",
+                "/home/dishita/mrm_ws/src/realsense/realsense2_camera/include/**",
+                "/home/dishita/mrm_ws/src/realsense_gazebo_plugin/include/**",
+                "/home/dishita/mrm_ws/src/rover/include/**",
+                "/usr/include/**",
+                "/opt/ros/noetic/include",
+                "/usr/include/pcl-1.10",
+                "/usr/include/eigen3",
+                "/home/dishita/mrm_ws/devel/include",
+                "${workspaceFolder}/include/rover",
+                "/usr/include/openssl"
+            ],
+            "name": "ROS"
+        }
+    ],
+    "version": 4
+}

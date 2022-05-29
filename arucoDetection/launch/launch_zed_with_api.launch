@@ -1,0 +1,5 @@
+<launch>
+<node pkg="arucoDetection" name="zed_chala.py" type="zed_chala.py" output="screen">
+</node>
+
+</launch>

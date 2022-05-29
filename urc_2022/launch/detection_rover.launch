@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<launch>
+  <node pkg="urc_2022" type="arucoDetection" name="arucoDetection" output="screen"/>
+    <remap from="image" to="/marker_detect/image_raw"/>
+    <param name="autosize" value="true" />
+  <node pkg="urc_2022" type="post_traversal" name="post_traversal" output="screen"/>
+</launch>

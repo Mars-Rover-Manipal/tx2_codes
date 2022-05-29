@@ -1,0 +1,258 @@
+<?xml version='1.0'?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="urc">
+<xacro:include filename="$(find rover)/src/urdf/rover.gazebo"/>
+<xacro:include filename="$(find rover)/src/urdf/lidar.gazebo"/>
+<xacro:property name="ch_length" value="0.673" />
+<xacro:property name="ch_width" value="0.43" />
+<xacro:property name="ch_height" value="0.2" />
+<xacro:property name="ch_mass" value="5"/>
+
+
+<xacro:property name="wheel_width" value="0.18" />
+<xacro:property name="wheel_radius" value="0.15" />
+<xacro:property name="wheel_mass" value="3.0"/>
+
+
+<!--Chassis -->
+
+<link name="base_link">
+     <inertial>
+	<origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="${ch_mass}"/>
+ 	<inertia ixx="${ch_mass*(ch_length*ch_length+ch_height*ch_height)/12}" ixy="0.0" ixz="0.0" iyy="${ch_mass*(ch_length*ch_length+ch_width*ch_width)/12}" iyz="0.0" izz="${ch_mass*(ch_width*ch_width+ch_height*ch_height)/12}"/>
+    </inertial>
+    <visual>
+	<origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+            <box size="${ch_length} ${ch_width} ${ch_height}"/>
+        </geometry>
+    </visual>
+    <collision>
+	<origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+            <box size="${ch_length} ${ch_width} ${ch_height}"/>
+        </geometry>
+    </collision>
+</link>
+
+
+<!--Right Side of the Chassis-->
+
+<!--Wheel Front Right 1-->
+
+<link name="front_right_1">
+     <inertial>
+	<origin xyz="0 0 0" rpy="0 1.57 1.57"/>
+      <mass value="${wheel_mass}"/>
+ 	<inertia ixx="${wheel_mass*((3*wheel_radius*wheel_radius)+(wheel_width*wheel_width))/12}" ixy="0.0" ixz="0.0" iyy="${wheel_mass*((3*wheel_radius*wheel_radius)+(wheel_width*wheel_width))/12}" iyz="0.0" izz="${wheel_mass*((3*wheel_radius*wheel_radius)+(wheel_width*wheel_width))/12}"/>
+    </inertial>
+    <visual>
+	<origin xyz="0 0 0" rpy="0 1.57 1.57"/>
+        <geometry>
+            <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+        </geometry>
+    </visual>
+    <collision>
+	<origin xyz="0 0 0" rpy="0 1.57 1.57"/>
+        <geometry>
+            <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+        </geometry>
+     <surface>
+        <friction>
+          <ode>
+            <mu>0.01</mu>
+            <mu2>0.01</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+</link>
+
+
+<!--Wheel Front Right Joint 1-->
+
+<joint type="continuous" name="front_right_joint_1">
+    <origin rpy="0 0 0" xyz="0.3 ${-ch_width/2-wheel_width/2} 0" />
+    <child link="front_right_1"/>
+    <parent link="base_link"/>
+    <axis xyz="0 1 0" rpy="0 0 "/>
+    <limit effort="100" velocity="0.5"/>
+    <joint_properties damping="0.0" friction="1.0"/>
+</joint>
+
+<!--Wheel Front Right 2-->
+
+<link name="front_right_2">
+     <inertial>
+	<origin xyz="0 0 0" rpy="0 1.57 1.57"/>
+      <mass value="${wheel_mass}"/>
+ 	<inertia ixx="${wheel_mass*((3*wheel_radius*wheel_radius)+(wheel_width*wheel_width))/12}" ixy="0.0" ixz="0.0" iyy="${wheel_mass*((3*wheel_radius*wheel_radius)+(wheel_width*wheel_width))/12}" iyz="0.0" izz="${wheel_mass*((3*wheel_radius*wheel_radius)+(wheel_width*wheel_width))/12}"/>
+    </inertial>
+    <visual>
+	<origin xyz="0 0 0" rpy="0 1.57 1.57"/>
+        <geometry>
+            <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+        </geometry>
+    </visual>
+    <collision>
+	<origin xyz="0 0 0" rpy="0 1.57 1.57"/>
+        <geometry>
+            <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+        </geometry>
+    <surface>
+        <friction>
+          <ode>
+            <mu>0.01</mu>
+            <mu2>0.01</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+</link>
+
+
+<!--Wheel Front Right Joint 2-->
+
+<joint type="continuous" name="front_right_joint_2">
+    <origin rpy="0 0 0" xyz="-0.3 ${-ch_width/2-wheel_width/2} 0" />
+    <child link="front_right_2"/>
+    <parent link="base_link"/>
+    <axis xyz="0 1 0" rpy="0 0 "/>
+    <limit effort="100" velocity="0.5"/>
+    <joint_properties damping="0.0" friction="1.0"/>
+</joint>
+
+
+<!--Left Side of the Chassis-->
+
+<!--Wheel Front Left 1-->
+
+<link name="front_left_1">
+     <inertial>
+	<origin xyz="0 0 0" rpy="0 1.57 1.57"/>
+      <mass value="${wheel_mass}"/>
+ 	<inertia ixx="${wheel_mass*((3*wheel_radius*wheel_radius)+(wheel_width*wheel_width))/12}" ixy="0.0" ixz="0.0" iyy="${wheel_mass*((3*wheel_radius*wheel_radius)+(wheel_width*wheel_width))/12}" iyz="0.0" izz="${wheel_mass*((3*wheel_radius*wheel_radius)+(wheel_width*wheel_width))/12}"/>
+    </inertial>
+    <visual>
+	<origin xyz="0 0 0" rpy="0 1.57 1.57"/>
+        <geometry>
+            <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+        </geometry>
+    </visual>
+    <collision>
+	<origin xyz="0 0 0" rpy="0 1.57 1.57"/>
+        <geometry>
+            <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+        </geometry>
+    <surface>
+        <friction>
+          <ode>
+            <mu>0.01</mu>
+            <mu2>0.01</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+</link>
+
+
+<!--Wheel Front Left Joint 1-->
+
+<joint type="continuous" name="front_left_joint_1">
+    <origin rpy="0 0 0" xyz="0.3 ${ch_width/2+wheel_width/2} 0" />
+    <child link="front_left_1"/>
+    <parent link="base_link"/>
+    <axis xyz="0 1 0" rpy="0 0 "/>
+    <limit effort="100" velocity="0.5"/>
+    <joint_properties damping="0.0" friction="1.0"/>
+</joint>
+
+
+<!--Wheel Front Left 2-->
+
+<link name="front_left_2">
+     <inertial>
+	<origin xyz="0 0 0" rpy="0 1.57 1.57"/>
+      <mass value="${wheel_mass}"/>
+ 	<inertia ixx="${wheel_mass*((3*wheel_radius*wheel_radius)+(wheel_width*wheel_width))/12}" ixy="0.0" ixz="0.0" iyy="${wheel_mass*((3*wheel_radius*wheel_radius)+(wheel_width*wheel_width))/12}" iyz="0.0" izz="${wheel_mass*((3*wheel_radius*wheel_radius)+(wheel_width*wheel_width))/12}"/>
+    </inertial>
+    <visual>
+	<origin xyz="0 0 0" rpy="0 1.57 1.57"/>
+        <geometry>
+            <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+        </geometry>
+    </visual>
+    <collision>
+	<origin xyz="0 0 0" rpy="0 1.57 1.57"/>
+        <geometry>
+            <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+        </geometry>
+    <surface>
+        <friction>
+          <ode>
+            <mu>0.01</mu>
+            <mu2>0.01</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+</link>
+
+
+<!--Wheel Front Left Joint 2-->
+
+<joint type="continuous" name="front_left_joint_2">
+    <origin rpy="0 0 0" xyz="-0.3 ${ch_width/2+wheel_width/2} 0" />
+    <child link="front_left_2"/>
+    <parent link="base_link"/>
+    <axis xyz="0 1 0" rpy="0 0 "/>
+    <limit effort="100" velocity="0.5"/>
+    <joint_properties damping="0.0" friction="1.0"/>
+</joint>
+
+
+<!-- Realsense -->
+ <xacro:include filename="$(find rover)/src/urdf/realsense_cam_new.gazebo"/>
+  <link name="stereocam">
+    <collision>
+      <origin xyz="-0.05 0 -0.1" rpy="0 0 0"/>
+	<geometry>
+ 
+          <box size="0.01 0.01 0.01"/>
+        </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="-0.05 0 -0.1" rpy="0 0 0"/>
+        <geometry>
+
+          <box size="0.01 0.01 0.01"/>
+        </geometry>
+    </visual>
+
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="-0.05 0 -0.1" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+      </inertial>
+  </link>
+
+
+
+  <joint name="stereocam_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="${ch_width} 0 0.11" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="stereocam"/>
+  </joint>
+
+<!-- imu -->
+ <xacro:include filename="$(find rover)/src/urdf/IMU.gazebo"/>
+
+
+
+</robot>
+
+
+
+

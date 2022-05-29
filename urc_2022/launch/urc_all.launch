@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<launch>
+<!--ARUCO LAUNCH FILE ADD HERE -->
+
+<!--SICK LAUNCH
+	<include file="$(find sick_scan)/launch/sick_mrs_1xxx.launch"/>-->	
+<!--PLANNER CONFIG FILE FOR COORDINATES-->
+	<rosparam file="$(find urc_2022)/config/globalPlanner.yaml" />
+<!--PLANNER EXECUTION (GLOBAL AND LOCAL)-->
+	<node name="urc_chala_node" pkg="urc_2022" type="urc_chala_node" output="screen"/>
+<!--SOCKET CLIENT PWM NODE 
+	<node name="urc_pwm_chala" pkg="urc_2022" type="urc_pwm_chala" output="screen"/>-->  
+</launch>
